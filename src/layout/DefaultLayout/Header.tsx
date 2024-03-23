@@ -9,9 +9,10 @@ function Header() {
     const [selectedLanguage, setSelectedLanguage] = useState<number>(0)
 
     return <div
-        className={`shadow-sm d-flex align-items-center justify-content-between position-sticky ${styles.container}`}
+        className={`z-1 shadow-sm d-flex align-items-center justify-content-between position-sticky ${styles.container}`}
         style={{
-            top: '0'
+            top: '0',
+            backgroundColor: '#fff',
         }}
     >
         <div className='ps-2'>

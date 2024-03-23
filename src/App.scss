@@ -16,5 +16,9 @@ p {
   margin-bottom: 0;
 }
 
+img {
+  object-fit: cover;
+}
+
 //Variable
 $main-color: rgb(69, 153, 221)

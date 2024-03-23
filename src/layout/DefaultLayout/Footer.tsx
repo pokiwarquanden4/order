@@ -4,9 +4,10 @@ import { faCartShopping, faHouse, faUser } from '@fortawesome/free-solid-svg-ico
 
 function Footer() {
     return <div
-        className={`position-sticky d-flex align-items-center justify-content-around ${styles.container}`}
+        className={`z-1 position-sticky d-flex align-items-center justify-content-around ${styles.container}`}
         style={{
-            bottom: '0'
+            bottom: '0',
+            backgroundColor: '#fff'
         }}
     >
         <FontAwesomeIcon className={`${styles.icon}`} icon={faHouse}></FontAwesomeIcon>
