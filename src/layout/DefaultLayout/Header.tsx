@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faUser } from '@fortawesome/free-regular-svg-icons'
 import LoginForm from '../../component/loginForm/LoginForm'
+import Notify from '../../component/notify/Notify'
 
 function Header() {
     const [selectedLanguage, setSelectedLanguage] = useState<number>(0)
@@ -30,7 +31,11 @@ function Header() {
                         className='d-flex align-items-center justify-content-center' style={{ height: '27px', width: '27px' }}>
                         {allFlags[selectedLanguage].img}
                     </div>
-                    <div className='ps-4'>
+                    <div
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offCanvasNotify"
+                        aria-controls="offCanvasNotify"
+                        className='ps-4'>
                         <FontAwesomeIcon style={{ fontSize: '24px' }} icon={faBell}></FontAwesomeIcon>
                     </div>
                     <div className='ps-4'
@@ -75,6 +80,18 @@ function Header() {
                 <div className="rounded-pill border px-4 py-2 my-1">Viet Name</div>
                 <div className="rounded-pill border px-4 py-2 my-1">USA</div>
                 <div className="rounded-pill border px-4 py-2 my-1">Chinese</div>
+            </div>
+        </div>
+
+        {/* OFF canvas of notify */}
+        <div className="offcanvas h-75 offcanvas-bottom" data-bs-scroll="true" id="offCanvasNotify" aria-labelledby="offCanvasNotifyLabel">
+            <div className="offcanvas-header">
+                <h5 className="offcanvas-title" id="offCanvasNotifyLabel">Thong bao</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div className='px-3 d-flex flex-column overflow-auto pb-2'>
+                <Notify></Notify>
+                <Notify></Notify>
             </div>
         </div>
     </div>

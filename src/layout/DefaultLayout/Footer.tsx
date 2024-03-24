@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './Footer.module.scss'
 import { faCartShopping, faHouse, faUser } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { routes } from '../../pages'
 
 function Footer() {
+    const location = useLocation()
     const nav = useNavigate()
 
     return <div
@@ -14,17 +15,17 @@ function Footer() {
             backgroundColor: '#fff'
         }}
     >
-        <FontAwesomeIcon className={`${styles.icon}`} icon={faHouse}
+        <FontAwesomeIcon className={`${styles.icon} ${location.pathname === routes.home ? styles.icon_focus : undefined}`} icon={faHouse}
             onClick={() => {
                 nav(routes.home)
             }}
         ></FontAwesomeIcon>
-        <FontAwesomeIcon className={`${styles.icon}`} icon={faCartShopping}
+        <FontAwesomeIcon className={`${styles.icon} ${location.pathname === routes.cart ? styles.icon_focus : undefined}`} icon={faCartShopping}
             onClick={() => {
                 nav(routes.cart)
             }}
         ></FontAwesomeIcon>
-        <FontAwesomeIcon className={`${styles.icon}`} icon={faUser}
+        <FontAwesomeIcon className={`${styles.icon} ${location.pathname === routes.account ? styles.icon_focus : undefined}`} icon={faUser}
             onClick={() => {
                 nav(routes.account)
             }}

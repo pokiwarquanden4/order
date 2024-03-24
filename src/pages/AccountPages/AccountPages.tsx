@@ -2,15 +2,24 @@ import { faUser } from "@fortawesome/free-regular-svg-icons"
 import { faChevronRight, faCircleExclamation, faFont, faTableList } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from './AccountPages.module.scss'
+import { useNavigate } from "react-router-dom"
+import { routes } from ".."
 
 function AccountPages() {
+    const nav = useNavigate()
+
     return <div className="px-3 py-4">
         <div className="d-flex align-items-center pb-4">
             <img className={`${styles.fitImg} me-3`} src="https://i.pinimg.com/736x/3f/3c/9a/3f3c9a765bdeb8b74d1fe6c5084f6b34.jpg" alt="error"></img>
             <div className="h4">Tran Minh Quang</div>
         </div>
-        <div className="border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
-            <div className="d-flex align-items-center">
+        <div
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offCanvasNotify"
+            aria-controls="offCanvasNotify"
+            className="border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
+            <div
+                className="d-flex align-items-center">
                 <FontAwesomeIcon
                     style={{
                         width: '50px',
@@ -21,7 +30,11 @@ function AccountPages() {
             </div>
             <FontAwesomeIcon className="pe-2" icon={faChevronRight}></FontAwesomeIcon>
         </div>
-        <div className="mt-3 border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
+        <div
+            onClick={() => {
+                nav(routes.accountDetails)
+            }}
+            className="mt-3 border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
                 <FontAwesomeIcon
                     style={{
@@ -33,7 +46,11 @@ function AccountPages() {
             </div>
             <FontAwesomeIcon className="pe-2" icon={faChevronRight}></FontAwesomeIcon>
         </div>
-        <div className="mt-3 border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
+        <div
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offCanvasFlags"
+            aria-controls="offCanvasFlags"
+            className="mt-3 border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
                 <FontAwesomeIcon
                     style={{
