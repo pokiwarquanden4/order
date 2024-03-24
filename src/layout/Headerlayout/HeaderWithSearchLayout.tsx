@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
+import HeaderWithSearch from '../DefaultLayout/HeaderWithSearch';
 import Footer from '../DefaultLayout/Footer';
-import Header from '../DefaultLayout/Header';
 
-function HeaderLayout({ children }: { children: ReactNode }) {
+function HeaderWithSearchLayout({ children }: { children: ReactNode }) {
     return <div className={`h-100 d-flex flex-column position-relative`}>
-        <Header></Header>
+        <HeaderWithSearch></HeaderWithSearch>
         <div className={`flex-fill`}>{children}</div>
         <Footer></Footer>
     </div>
 }
 
-export default HeaderLayout
+export default HeaderWithSearchLayout
