@@ -14,8 +14,6 @@ function HomePage() {
             <div className="h5 pb-1 fw-bolder">Com ga</div>
             <div className="row">
                 <Dish></Dish>
-                <Dish></Dish>
-                <Dish></Dish>
             </div>
         </div>
     </div>
