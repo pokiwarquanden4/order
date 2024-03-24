@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import emptyCart from '../../img/empty-cart.svg'
 import { useNavigate } from "react-router-dom"
 import { routes } from ".."
+import DishPayment from "../../component/dishPayment/DishPayment"
 
 function CartPages() {
     const nav = useNavigate()
@@ -67,7 +68,11 @@ function CartPages() {
             <div className="mt-3 shadow rounded p-4">
                 <div className="d-flex align-items-center justify-content-between pb-2">
                     <div className="h5 m-0">Mon da chon</div>
-                    <button type="button" className="btn btn-outline-primary">
+                    <button type="button" className="btn btn-outline-primary"
+                        onClick={() => {
+                            nav(routes.home)
+                        }}
+                    >
                         <FontAwesomeIcon className="pe-1" icon={faPlus}></FontAwesomeIcon>
                         Them mon
                     </button>
@@ -76,80 +81,8 @@ function CartPages() {
                     true
                         ?
                         <div>
-                            <div className="border-bottom py-2">
-                                <div className="d-flex justify-content-between pb-2">
-                                    <div className="text-truncate">Com ga xoi mo</div>
-                                    <div>20.000</div>
-                                </div>
-                                <div className="d-flex justify-content-between">
-                                    <div className="d-flex align-items-center">
-                                        <div
-                                            className="d-flex align-items-center pe-3"
-                                            style={{
-                                                color: 'red'
-                                            }}
-                                        >Xoa</div>
-                                        <div
-                                            className="d-flex align-items-center"
-                                            style={{
-                                                color: 'rgb(7,102,253)'
-                                            }}
-                                        >Ghi chu</div>
-                                    </div>
-                                    <div className="d-flex align-items-center">
-                                        <div
-                                            style={{
-                                                width: '30px',
-                                                height: '30px'
-                                            }}
-                                            className="d-flex justify-content-center align-items-center border rounded-circle fw-bold h6 mb-0">-</div>
-                                        <div className="h5 mb-0 px-3">1</div>
-                                        <div
-                                            style={{
-                                                width: '30px',
-                                                height: '30px'
-                                            }}
-                                            className="d-flex justify-content-center align-items-center border rounded-circle fw-bold h6 mb-0">+</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="border-bottom py-2">
-                                <div className="d-flex justify-content-between pb-2">
-                                    <div className="text-truncate">Com ga xoi mo</div>
-                                    <div>20.000</div>
-                                </div>
-                                <div className="d-flex justify-content-between">
-                                    <div className="d-flex align-items-center">
-                                        <div
-                                            className="d-flex align-items-center pe-3"
-                                            style={{
-                                                color: 'red'
-                                            }}
-                                        >Xoa</div>
-                                        <div
-                                            className="d-flex align-items-center"
-                                            style={{
-                                                color: 'rgb(7,102,253)'
-                                            }}
-                                        >Ghi chu</div>
-                                    </div>
-                                    <div className="d-flex align-items-center">
-                                        <div
-                                            style={{
-                                                width: '30px',
-                                                height: '30px'
-                                            }}
-                                            className="d-flex justify-content-center align-items-center border rounded-circle fw-bold h6 mb-0">-</div>
-                                        <div className="h5 mb-0 px-3">1</div>
-                                        <div
-                                            style={{
-                                                width: '30px',
-                                                height: '30px'
-                                            }}
-                                            className="d-flex justify-content-center align-items-center border rounded-circle fw-bold h6 mb-0">+</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <DishPayment></DishPayment>
+                            <DishPayment></DishPayment>
                         </div>
                         :
                         <div className="d-flex align-items-center justify-content-center">

@@ -1,0 +1,23 @@
+.notify_icon {
+    color: rgb(24, 134, 75);
+}
+
+.fitImg {
+    width: 70px;
+    height: 70px;
+}
+
+.dropdown {
+    transition: height ease 0.2s;
+    overflow: hidden;
+}
+
+.collapse {
+    height: 0;
+}
+
+.expand {
+    padding: 5px 0;
+    height: 150px;
+    overflow: auto;
+}
