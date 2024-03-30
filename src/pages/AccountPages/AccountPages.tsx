@@ -1,9 +1,10 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons"
-import { faChevronRight, faCircleExclamation, faFont, faTableList } from "@fortawesome/free-solid-svg-icons"
+import { faChevronRight, faCircleExclamation, faFont, faRightFromBracket, faTableList } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from './AccountPages.module.scss'
 import { useNavigate } from "react-router-dom"
 import { routes } from ".."
+import { googleLogout } from "@react-oauth/google"
 
 function AccountPages() {
     const nav = useNavigate()
@@ -71,6 +72,20 @@ function AccountPages() {
                     }}
                     icon={faCircleExclamation}></FontAwesomeIcon>
                 <div className="ps-2 h5 mb-0">Ve chung toi</div>
+            </div>
+            <FontAwesomeIcon className="pe-2" icon={faChevronRight}></FontAwesomeIcon>
+        </div>
+        <div
+            onClick={googleLogout}
+            className="mt-3 border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
+            <div className="d-flex align-items-center">
+                <FontAwesomeIcon
+                    style={{
+                        width: '50px',
+                        fontSize: '20px'
+                    }}
+                    icon={faRightFromBracket}></FontAwesomeIcon>
+                <div className="ps-2 h5 mb-0">Dang xuat</div>
             </div>
             <FontAwesomeIcon className="pe-2" icon={faChevronRight}></FontAwesomeIcon>
         </div>

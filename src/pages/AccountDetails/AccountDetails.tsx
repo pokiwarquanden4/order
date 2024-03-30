@@ -33,6 +33,8 @@ function AccountDetails() {
             <option value="2">Female</option>
             <option value="3">Other</option>
         </select>
+
+        <button type="button" className="btn btn-primary mt-5">Save</button>
     </div>
 }
 

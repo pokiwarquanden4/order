@@ -8,8 +8,11 @@ import SearchBox from '../../component/searchBox/SearchBox'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import LoginForm from '../../component/loginForm/LoginForm'
 import Notify from '../../component/notify/Notify'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '../../pages'
 
 function HeaderWithSearch() {
+    const nav = useNavigate()
     const [selectedLanguage, setSelectedLanguage] = useState<number>(0)
     const [searchVal, setSearchVal] = useState<string>('')
 
@@ -92,8 +95,12 @@ function HeaderWithSearch() {
                     </div>
                     <div className="modal-footer d-flex justify-content-between">
                         <div
+                            data-bs-dismiss="modal"
                             style={{
                                 color: 'rgb(7,102,253)'
+                            }}
+                            onClick={() => {
+                                nav(routes.createAccount)
                             }}
                         >Tao Tai Khoan</div>
                         <button type="button" className="btn btn-primary">Understood</button>

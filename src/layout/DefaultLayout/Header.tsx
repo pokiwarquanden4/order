@@ -6,8 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faUser } from '@fortawesome/free-regular-svg-icons'
 import LoginForm from '../../component/loginForm/LoginForm'
 import Notify from '../../component/notify/Notify'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '../../pages'
 
 function Header() {
+    const nav = useNavigate()
     const [selectedLanguage, setSelectedLanguage] = useState<number>(0)
 
     return <div>
@@ -61,8 +64,12 @@ function Header() {
                     </div>
                     <div className="modal-footer d-flex justify-content-between">
                         <div
+                            data-bs-dismiss="modal"
                             style={{
                                 color: 'rgb(7,102,253)'
+                            }}
+                            onClick={() => {
+                                nav(routes.createAccount)
                             }}
                         >Tao Tai Khoan</div>
                         <button type="button" className="btn btn-primary">Understood</button>
