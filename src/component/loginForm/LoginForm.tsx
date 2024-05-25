@@ -1,12 +1,6 @@
-import { CredentialResponse, GoogleLogin } from "@react-oauth/google"
-import { jwtDecode } from "jwt-decode";
-
 function LoginForm() {
-    const responseMessage = (response: CredentialResponse) => {
-        console.log(jwtDecode(response.credential))
-    };
-    const errorMessage = (error) => {
-        console.log(error);
+    const googleLogin = () => {
+        window.open("http://localhost:5000/auth/google", "_self");
     };
 
     return <div>
@@ -21,8 +15,8 @@ function LoginForm() {
         <div id="passwordHelpBlock" className="form-text">
             Your password must be 8-20 characters long
         </div>
-        <div className="d-flex justify-content-center mt-3">
-            <GoogleLogin onSuccess={responseMessage} />
+        <div className="d-flex justify-content-center mt-3" onClick={googleLogin}>
+            Click me
         </div>
     </div>
 }
