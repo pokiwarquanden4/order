@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+
 function LoginForm() {
     const googleLogin = () => {
         window.open("http://localhost:5000/auth/google", "_self");
@@ -15,8 +18,11 @@ function LoginForm() {
         <div id="passwordHelpBlock" className="form-text">
             Your password must be 8-20 characters long
         </div>
-        <div className="d-flex justify-content-center mt-3" onClick={googleLogin}>
-            Click me
+        <div className="d-flex justify-content-center">
+            <button type="button" className="mt-3 btn btn-outline-success d-flex align-items-center" onClick={googleLogin}>
+                <FontAwesomeIcon className="pe-2" icon={faGoogle}></FontAwesomeIcon>
+                Login with google
+            </button>
         </div>
     </div>
 }

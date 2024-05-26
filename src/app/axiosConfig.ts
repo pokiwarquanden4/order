@@ -15,6 +15,7 @@ export const handleAxiosRequest = async (config: InternalAxiosRequestConfig) => 
 }
 
 export const handleAxiosResponse = async (response: any) => {
+    console.log(response)
     //if contain jwt then save it in local storage
     if (response.data.accessToken && response.status === 200) {
         cookies.set('token', response.data.accessToken, {
