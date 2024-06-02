@@ -5,3 +5,11 @@
 .notify_icon {
     color: rgb(24, 134, 75);
 }
+
+.fitImg {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}

@@ -1,36 +1,70 @@
 import { useCallback, useState } from 'react'
 import styles from './CreateAccount.module.scss'
-import { isValidEmail, isValidPhoneNumber } from '../../logic/logic'
+import { isValidEmail } from '../../logic/logic'
+import { useAppDispatch } from '../../app/hook'
+import { createAccount, ICreateAccount } from './CreateAccountAPI'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '..'
+import { showAlert } from '../../component/arlet/arlet'
 
 function CreateAccount() {
-    const [input, setInput] = useState<{
-        phoneNumber: string
-        name: string
-        address: string
-        email: string
-        gender: number
-    }>({
-        phoneNumber: '',
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const [input, setInput] = useState<ICreateAccount>({
+        account: '',
+        password: '',
         name: '',
-        address: '',
         email: '',
-        gender: 0
+        gender: false,
+        role: 'Customer'
     })
 
     const [error, setError] = useState<{
+        account: boolean,
+        password: boolean,
         phoneNumber: boolean
         name: boolean
         address: boolean
         email: boolean
     }>({
+        account: false,
+        password: false,
         phoneNumber: false,
         name: false,
         address: false,
         email: false,
     })
 
-    const onChangeInput = useCallback((key: string, input: string | number) => {
+    const onChangeInput = useCallback((key: string, input: string | number | boolean | File) => {
         switch (key) {
+            case 'account':
+                setInput(preData => {
+                    return {
+                        ...preData,
+                        account: input as string
+                    }
+                })
+                setError(preData => {
+                    return {
+                        ...preData,
+                        account: false
+                    }
+                })
+                break
+            case 'password':
+                setInput(preData => {
+                    return {
+                        ...preData,
+                        password: input as string
+                    }
+                })
+                setError(preData => {
+                    return {
+                        ...preData,
+                        password: false
+                    }
+                })
+                break
             case 'phoneNumber':
                 setInput(preData => {
                     return {
@@ -91,21 +125,32 @@ function CreateAccount() {
                 setInput(preData => {
                     return {
                         ...preData,
-                        gender: input as number
+                        gender: input as boolean
                     }
                 })
                 break
         }
     }, [])
 
-    const onSubmit = useCallback(() => {
-        if (!isValidPhoneNumber(input.phoneNumber)) {
+    const onSubmit = useCallback(async () => {
+        showAlert("Create success", 'success', { insert: 'top', container: 'top-center' });
+        if (!input.account) {
             setError(preData => {
                 return {
                     ...preData,
-                    phoneNumber: true
+                    account: true
                 }
             })
+            return
+        }
+        if (input.password.length < 10) {
+            setError(preData => {
+                return {
+                    ...preData,
+                    password: true
+                }
+            })
+            return
         }
         if (!input.name) {
             setError(preData => {
@@ -114,6 +159,7 @@ function CreateAccount() {
                     name: true
                 }
             })
+            return
         }
         if (!isValidEmail(input.email)) {
             setError(preData => {
@@ -122,8 +168,15 @@ function CreateAccount() {
                     email: true
                 }
             })
+            return
         }
-    }, [input.email, input.name, input.phoneNumber])
+
+        const res = await dispatch(createAccount(input))
+
+        if (res.payload.status === 200) {
+            navigate(routes.home)
+        }
+    }, [input, dispatch, navigate])
 
     return <div className="px-3 py-4 d-flex flex-column">
         <label
@@ -136,7 +189,6 @@ function CreateAccount() {
             <div className='d-flex justify-content-center mb-4'>
                 <img className={`${styles.fitImg}`} src="https://i.pinimg.com/736x/3f/3c/9a/3f3c9a765bdeb8b74d1fe6c5084f6b34.jpg" alt="error"></img>
             </div>
-            <input type="file" id="avatar" style={{ display: 'none' }} accept=".png, .jpg, .jpeg"></input>
         </label>
 
         <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
@@ -165,6 +217,38 @@ function CreateAccount() {
             error.name ?
                 <div className="form-text">
                     Please fill your name
+                </div>
+                :
+                undefined
+        }
+
+        <label htmlFor="account" className="form-label pt-4">Account</label>
+        <input type="text"
+            value={input.account}
+            onChange={(e) => {
+                onChangeInput("account", e.target.value)
+            }}
+            id="account" className="form-control"></input>
+        {
+            error.account ?
+                <div className="form-text">
+                    Please fill your account
+                </div>
+                :
+                undefined
+        }
+
+        <label htmlFor="password" className="form-label pt-4">Password</label>
+        <input type="password"
+            value={input.password}
+            onChange={(e) => {
+                onChangeInput("password", e.target.value)
+            }}
+            id="password" className="form-control"></input>
+        {
+            error.password ?
+                <div className="form-text">
+                    Password must be at least 10 letters
                 </div>
                 :
                 undefined

@@ -1,9 +1,11 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
+import UserSlice from "../reducers/UserSlice";
+import MenuSlice from "../reducers/MenuSlice";
 
 export const store = configureStore({
     reducer: {
-        // user: UserSlice,
-        // data: DataSlice
+        user: UserSlice,
+        menu: MenuSlice
     },
     // middleware: (getDefaultMiddleware) => {
     //     getDefaultMiddleware({

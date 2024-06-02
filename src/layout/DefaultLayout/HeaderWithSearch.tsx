@@ -10,10 +10,15 @@ import LoginForm from '../../component/loginForm/LoginForm'
 import Notify from '../../component/notify/Notify'
 import { useNavigate } from 'react-router-dom'
 import { routes } from '../../pages'
+import { useAppDispatch, useAppSelector } from '../../app/hook'
+import { setSelectedMenu } from '../../reducers/MenuSlice'
 
 function HeaderWithSearch() {
+    const dispatch = useAppDispatch()
     const nav = useNavigate()
+    const menuList = useAppSelector(store => store.menu.menuNames)
     const [selectedLanguage, setSelectedLanguage] = useState<number>(0)
+    const user = useAppSelector(store => store.user)
     const [searchVal, setSearchVal] = useState<string>('')
 
     return <div>
@@ -44,13 +49,23 @@ function HeaderWithSearch() {
                         className='ps-4'>
                         <FontAwesomeIcon style={{ fontSize: '24px' }} icon={faBell}></FontAwesomeIcon>
                     </div>
-                    <div
-                        className='ps-4'
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"
-                    >
-                        <FontAwesomeIcon style={{ fontSize: '22px' }} icon={faUser}></FontAwesomeIcon>
-                    </div>
+                    {
+                        user.avatar
+                            ?
+                            <div
+                                onClick={() => { nav(routes.account) }}
+                                className='d-flex justify-content-center ps-3'
+                            >
+                                <img className={`${styles.fitImg}`} src={user.avatar} alt="error"></img>
+                            </div>
+                            :
+                            <div className='ps-4'
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop"
+                            >
+                                <FontAwesomeIcon style={{ fontSize: '22px' }} icon={faUser}></FontAwesomeIcon>
+                            </div>
+                    }
                 </div>
             </div>
             <div className="px-3 py-3">
@@ -73,13 +88,14 @@ function HeaderWithSearch() {
                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div className='px-3 d-flex flex-column overflow-auto pb-2'>
-                <div className="rounded-pill border px-4 py-2 my-1">All</div>
-                <div className="rounded-pill border px-4 py-2 my-1">Com ga</div>
-                <div className="rounded-pill border px-4 py-2 my-1">Com ga</div>
-                <div className="rounded-pill border px-4 py-2 my-1">Com ga</div>
-                <div className="rounded-pill border px-4 py-2 my-1">Com ga</div>
-                <div className="rounded-pill border px-4 py-2 my-1">Com ga</div>
-                <div className="rounded-pill border px-4 py-2 my-1">Com ga</div>
+                {menuList.map((menu) => {
+                    return <div
+                        onClick={() => {
+                            dispatch(setSelectedMenu(menu))
+                        }}
+                        className="rounded-pill border px-4 py-2 my-1"
+                    >{menu}</div>
+                })}
             </div>
         </div>
         {/* Login */}

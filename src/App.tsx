@@ -1,11 +1,15 @@
 import './App.scss';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Loading } from './component/loading/Loading';
+import 'react-notifications-component/dist/theme.css';
 import { ReactNotifications } from 'react-notifications-component';
 import publicRoutes from './pages';
 import { useEffect } from 'react';
 import { useAppDispatch } from './app/hook';
 import axios from 'axios';
+import { IUser, setUser } from './reducers/UserSlice';
+import { getMenuNames } from './pages/HomePages/HomePageAPI';
+import { setMenu } from './reducers/MenuSlice';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -13,7 +17,7 @@ function App() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/auth/login/success', {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/login/success`, {
           withCredentials: true, // Include cookies for authentication
           headers: {
             'Accept': 'application/json',
@@ -23,7 +27,8 @@ function App() {
         });
 
         if (response.status === 200) {
-          console.log(response.data); // Access response data instead of resObject
+          console.log(response.data.data.user);
+          dispatch(setUser(response.data.data.user as IUser))
         } else {
           throw new Error('authentication has been failed!');
         }
@@ -33,7 +38,17 @@ function App() {
     };
 
     getUser();
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const api = async () => {
+      const res = await dispatch(getMenuNames({}))
+
+      dispatch(setMenu(res.payload.data.menu as string[]))
+    }
+
+    api()
+  }, [dispatch])
 
   return (
     <Router>

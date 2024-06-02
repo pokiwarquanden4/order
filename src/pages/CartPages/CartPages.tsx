@@ -9,7 +9,7 @@ import DishPayment from "../../component/dishPayment/DishPayment"
 function CartPages() {
     const nav = useNavigate()
 
-    return <div className="">
+    return <div className="d-flex flex-column h-100">
         <div
             className="position-sticky d-flex align-items-center px-3 shadow-sm "
             style={{
@@ -33,7 +33,11 @@ function CartPages() {
                 }}
             >Cart</div>
         </div>
-        <div className="px-2 pb-3">
+        <div className="overflow-auto px-2 pb-3"
+            style={{
+                height: `calc(100vh - 112px)`
+            }}
+        >
             <div className="mt-3 shadow rounded p-4">
                 <div className="h5 pb-2">Thong tin nhan hang</div>
                 <div className="d-flex align-items-center border-bottom pb-3">

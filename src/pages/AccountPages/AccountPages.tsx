@@ -4,9 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from './AccountPages.module.scss'
 import { useNavigate } from "react-router-dom"
 import { routes } from ".."
-import { googleLogout } from "@react-oauth/google"
 
 function AccountPages() {
+    const logout = () => {
+        window.open("http://localhost:5000/auth/logout", "_self");
+    };
+
     const nav = useNavigate()
 
     return <div className="px-3 py-4">
@@ -76,7 +79,7 @@ function AccountPages() {
             <FontAwesomeIcon className="pe-2" icon={faChevronRight}></FontAwesomeIcon>
         </div>
         <div
-            onClick={googleLogout}
+            onClick={logout}
             className="mt-3 border rounded shadow-sm px-2 py-3 d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
                 <FontAwesomeIcon

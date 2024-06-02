@@ -8,9 +8,11 @@ import LoginForm from '../../component/loginForm/LoginForm'
 import Notify from '../../component/notify/Notify'
 import { useNavigate } from 'react-router-dom'
 import { routes } from '../../pages'
+import { useAppSelector } from '../../app/hook'
 
 function Header() {
     const nav = useNavigate()
+    const user = useAppSelector(store => store.user)
     const [selectedLanguage, setSelectedLanguage] = useState<number>(0)
 
     return <div>
@@ -41,12 +43,23 @@ function Header() {
                         className='ps-4'>
                         <FontAwesomeIcon style={{ fontSize: '24px' }} icon={faBell}></FontAwesomeIcon>
                     </div>
-                    <div className='ps-4'
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"
-                    >
-                        <FontAwesomeIcon style={{ fontSize: '22px' }} icon={faUser}></FontAwesomeIcon>
-                    </div>
+                    {
+                        user.avatar
+                            ?
+                            <div
+                                onClick={() => { nav(routes.account) }}
+                                className='d-flex justify-content-center ps-3'
+                            >
+                                <img className={`${styles.fitImg}`} src={user.avatar} alt="error"></img>
+                            </div>
+                            :
+                            <div className='ps-4'
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop"
+                            >
+                                <FontAwesomeIcon style={{ fontSize: '22px' }} icon={faUser}></FontAwesomeIcon>
+                            </div>
+                    }
                 </div>
             </div>
         </div>
